@@ -1,7 +1,6 @@
 import { useMemo } from "react"
 
-
-export default function Header({ cart }) {
+export default function Header({ cart, handlerAdd, handlerSubstract, handlerDelete, handlerEmpty }) {
     // Lógica
 
     const isEmpty = useMemo(() => cart.length === 0, [cart])
@@ -11,7 +10,6 @@ export default function Header({ cart }) {
             return total + (guitar.price * guitar.quantity)
         }, 0)
     }, [cart])
-
 
 
     return (
@@ -64,6 +62,8 @@ export default function Header({ cart }) {
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
+                                                                    onClick={() => handlerSubstract(guitar)}
+
                                                                 >
                                                                     -
                                                                 </button>
@@ -71,14 +71,16 @@ export default function Header({ cart }) {
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
+                                                                    onClick={() => handlerAdd(guitar)}
                                                                 >
-                                                                    +
+                                                                  +
                                                                 </button>
                                                             </td>
                                                             <td>
                                                                 <button
                                                                     className="btn btn-danger"
                                                                     type="button"
+                                                                    onClick={() => handlerDelete(guitar)}
                                                                 >
                                                                     X
                                                                 </button>
@@ -98,7 +100,7 @@ export default function Header({ cart }) {
                                     {/* <p className="text-end">Total pagar: <span className="fw-bold"></span> </p> */}
 
 
-                                    <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={handlerEmpty}>Vaciar Carrito</button>
                                 </div>
                             </div>
                         </nav>
