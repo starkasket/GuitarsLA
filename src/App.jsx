@@ -29,9 +29,6 @@ function App() {
           console.log(item.quantity);
           console.log(item);
   
-  
-  
-  
           console.log(cart);
   
       } */
@@ -55,86 +52,86 @@ function App() {
 
     }
 
-    /*   const calcularTotal = () => {
-          const guitarPrice = cart.forEach((guitar) => guitar.guitarPrice * guitar.quantity);
-          console.log(guitarPrice);
-          
-      } */
+  /*   function handleSum(item) {
+        const guitarExist = cart.findIndex((guitar) => guitar.id === item.id);
 
-/*     function calcularTotal(item) {
+        if (guitarExist >= 0) {
+            const updatedCart = [...cart];
 
-        const guitarPrice = cart.forEach(() => item.Price * item.quantity);
-        console.log(guitarPrice);
+            updatedCart[guitarExist].quantity++;
 
+        }
     } */
-    /*   data.forEach(guitar => {
-          console.log("Guitarra encontrada: " + guitar.name);
-          
-      });
-   */
 
-    /*  data.map((guitar) => {
-         console.log("Guitarra encontrada: " + guitar.name);    
-     }) */
 
-    /* ERROR
-    if (auth) {
-        const [ref, setRef] = useState([]);
+        /*   data.forEach(guitar => {
+              console.log("Guitarra encontrada: " + guitar.name);
+              
+          });
+       */
+
+        /*  data.map((guitar) => {
+             console.log("Guitarra encontrada: " + guitar.name);    
+         }) */
+
+        /* ERROR
+        if (auth) {
+            const [ref, setRef] = useState([]);
+        }
+        */
+
+        // useEffect
+
+        /*   useEffect(() => {
+              // Acción al cargar el componente
+              console.log("Componente listo");
+      
+      
+          }, [])
+      
+          useEffect(() => {
+              // Acción al cargar el componente
+              console.log("Token cambió");
+          }, [auth])
+      
+          setTimeout(() => {
+              setAuth(true);
+              setTotal(100);
+          }, 3000) */
+
+
+        return (
+            // Fragment 
+            <>
+                <Header
+                    cart={cart}
+                />
+
+                <main className="container-xl mt-5">
+                    <h2 className="text-center">Nuestra Colección</h2>
+
+                    <div className="row mt-5">
+                        {data.map((guitar) => (
+                            // <p> Desde Guitarra: {guitar.name}</p>
+
+                            <Guitar
+                                key={guitar.id}
+                                guitar={guitar}
+                                handlerClick={() => handlerClick(guitar)}
+                            />
+                        ))}
+
+                    </div>
+                </main>
+
+
+                <footer className="bg-dark mt-5 py-5">
+                    <div className="container-xl">
+                        <p className="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
+                    </div>
+                </footer>
+            </>
+        )
     }
-    */
 
-    // useEffect
-
-    /*   useEffect(() => {
-          // Acción al cargar el componente
-          console.log("Componente listo");
-  
-  
-      }, [])
-  
-      useEffect(() => {
-          // Acción al cargar el componente
-          console.log("Token cambió");
-      }, [auth])
-  
-      setTimeout(() => {
-          setAuth(true);
-          setTotal(100);
-      }, 3000) */
-
-
-    return (
-        // Fragment 
-        <>
-            <Header
-                cart={cart}
-            />
-
-            <main className="container-xl mt-5">
-                <h2 className="text-center">Nuestra Colección</h2>
-
-                <div className="row mt-5">
-                    {data.map((guitar) => (
-                        // <p> Desde Guitarra: {guitar.name}</p>
-
-                        <Guitar
-                            key={guitar.id}
-                            guitar={guitar}
-                            handlerClick={() => handlerClick(guitar)}
-                        />
-                    ))}
-
-                </div>
-            </main>
-
-
-            <footer className="bg-dark mt-5 py-5">
-                <div className="container-xl">
-                    <p className="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
-                </div>
-            </footer>
-        </>
-    )
-}
-
-export default App
+    export default App

@@ -6,7 +6,11 @@ export default function Header({ cart }) {
 
     const isEmpty = useMemo(() => cart.length === 0, [cart])
 
- 
+    const total = useMemo(() => {
+        return cart.reduce((total, guitar) => {
+            return total + (guitar.price * guitar.quantity)
+        }, 0)
+    }, [cart])
 
 
 
@@ -85,7 +89,7 @@ export default function Header({ cart }) {
 
                                                 </tbody>
                                             </table>
-                                            <p className="text-end">Total pagar: <span className="fw-bold"> </span> </p>
+                                            <p className="text-end">Total pagar: <span className="fw-bold"> {" $" + total} </span> </p>
                                         </>
 
                                     )}
