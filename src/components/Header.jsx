@@ -1,15 +1,13 @@
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 
-export default function Header({ cart, handlerAdd, handlerSubstract, handlerDelete, handlerEmpty }) {
+export default function Header({ cart, decreaseQuantity, increaseQuantity, removeFromCart, clearCart }) {
     // Lógica
+
+    const [total, setTotal] = useState(0);
 
     const isEmpty = useMemo(() => cart.length === 0, [cart])
 
-    const total = useMemo(() => {
-        return cart.reduce((total, guitar) => {
-            return total + (guitar.price * guitar.quantity)
-        }, 0)
-    }, [cart])
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart])
 
 
     return (
@@ -50,7 +48,7 @@ export default function Header({ cart, handlerAdd, handlerSubstract, handlerDele
                                                 <tbody>
 
                                                     {cart.map((guitar) => (
-                                                        <tr>
+                                                        <tr key={guitar.id}>
                                                             <td>
                                                                 <img className="img-fluid" src={`./img/${guitar.image}.jpg`} alt="imagen guitarra" />
                                                             </td>
@@ -62,7 +60,7 @@ export default function Header({ cart, handlerAdd, handlerSubstract, handlerDele
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
-                                                                    onClick={() => handlerSubstract(guitar)}
+                                                                    onClick={() => decreaseQuantity(guitar.id)}
 
                                                                 >
                                                                     -
@@ -71,16 +69,16 @@ export default function Header({ cart, handlerAdd, handlerSubstract, handlerDele
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
-                                                                    onClick={() => handlerAdd(guitar)}
+                                                                    onClick={() => increaseQuantity(guitar.id)}
                                                                 >
-                                                                  +
+                                                                    +
                                                                 </button>
                                                             </td>
                                                             <td>
                                                                 <button
                                                                     className="btn btn-danger"
                                                                     type="button"
-                                                                    onClick={() => handlerDelete(guitar)}
+                                                                    onClick={() => removeFromCart(guitar.id)}
                                                                 >
                                                                     X
                                                                 </button>
@@ -91,16 +89,16 @@ export default function Header({ cart, handlerAdd, handlerSubstract, handlerDele
 
                                                 </tbody>
                                             </table>
-                                            <p className="text-end">Total pagar: <span className="fw-bold"> {" $" + total} </span> </p>
+                                            <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span> </p>
                                         </>
 
                                     )}
 
 
-                                    {/* <p className="text-end">Total pagar: <span className="fw-bold"></span> </p> */}
 
 
-                                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={handlerEmpty}>Vaciar Carrito</button>
+
+                                    <button className="btn btn-dark w-100 mt-3 p-2" onClick={() => clearCart()}>Vaciar Carrito</button>
                                 </div>
                             </div>
                         </nav>
