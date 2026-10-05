@@ -1,13 +1,10 @@
-import { useMemo, useState } from "react"
+import { useCart } from '../hooks/useCart';
 
 export default function Header({ cart, decreaseQuantity, increaseQuantity, removeFromCart, clearCart }) {
     // Lógica
 
-    const [total, setTotal] = useState(0);
+    const { cartTotal, isEmpty } = useCart();
 
-    const isEmpty = useMemo(() => cart.length === 0, [cart])
-
-    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart])
 
 
     return (
